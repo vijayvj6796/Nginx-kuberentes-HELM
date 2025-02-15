@@ -4,7 +4,8 @@ metadata:
   name: webapp-nginx
 spec:
   selector:
-    app: webapp-nginx
+    matchLabels:
+      app: webapp-nginx
   template:
     metadata:
       labels:
