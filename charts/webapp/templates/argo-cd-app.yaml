@@ -1,9 +1,10 @@
-export const argoCdAppConfig = `
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: webapp-argo-cd
+  namespace: argocd
 spec:
+  project: default  # Add this line
   source:
     repoURL: 'https://github.com/vijayvj6796/Nginx-kuberentes-HELM.git'
     path: charts/webapp
@@ -15,5 +16,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-`;
-
