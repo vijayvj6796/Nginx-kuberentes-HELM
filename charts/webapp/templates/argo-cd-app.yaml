@@ -1,0 +1,19 @@
+export const argoCdAppConfig = `
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: webapp-argo-cd
+spec:
+  source:
+    repoURL: 'https://github.com/vijayvj6796/Nginx-kuberentes-HELM.git'
+    path: charts/webapp
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+`;
+
