@@ -1,21 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp-nginx
+  name: {{ .Chart.Name }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: webapp-nginx
+      app: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        app: webapp-nginx
+        app: {{ .Chart.Name }}
     spec:
       containers:
-        - name: nginx
-          image: 250738637992.dkr.ecr.eu-west-1.amazonaws.com/argo/nginx:v1
-          ports:
-            - containerPort: 80
+      - name: nginx
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 80
       imagePullSecrets:
-        - name: ecr-regcred
+      - name: {{ .Values.imagePullSecrets.name }}
