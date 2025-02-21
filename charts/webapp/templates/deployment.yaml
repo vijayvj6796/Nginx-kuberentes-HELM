@@ -1,22 +1,29 @@
+{{- range .Values.global.configuration }}
+{{- if and (eq (toString .srvc) (toString $.Values.name)) (eq (toString .enabled) "true") }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ .name }}
+  namespace: {{ .namespace }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: {{ .Chart.Name }}-{{ .name }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: {{ .Chart.Name }}-{{ .name }}
     spec:
       containers:
-      - name: nginx
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      - name: {{ .name }}
+        image: "{{ .image.repository }}:{{ .image.tag }}"
+        imagePullPolicy: {{ .image.pullPolicy }}
         ports:
-        - containerPort: 80
+        - containerPort: {{ .ContainerPort}}
       imagePullSecrets:
-      - name: "{{ .Values.imagePullSecrets.name }}"
+      - name: {{ .imagePullSecrets.name }}
+
+{{- end }}
+{{- end }}
