@@ -5,7 +5,7 @@ global:
       name: nginx
       srvc: test-nginx
       enabled: true
-      replicaCount: 2
+      replicaCount: 1
       image:
         repository: 250738637992.dkr.ecr.eu-west-1.amazonaws.com/argo/nginx
         tag: v1
@@ -21,7 +21,7 @@ global:
       name: python
       srvc: test-python
       enabled: true
-      replicaCount: 1
+      replicaCount: 2
       image:
         repository: 250738637992.dkr.ecr.eu-west-1.amazonaws.com/argo/project-argo
         tag: latest
