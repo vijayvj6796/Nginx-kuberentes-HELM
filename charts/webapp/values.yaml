@@ -1,5 +1,4 @@
 global:
-
   configuration:
     nginx:
       name: nginx
@@ -28,7 +27,7 @@ global:
         pullPolicy: IfNotPresent
       imagePullSecrets:
         name: ecr-regcred
-      namespace: python
+      namespace: default
       ContainerPort: 80
       ingress:
         host: cipheronic.com
