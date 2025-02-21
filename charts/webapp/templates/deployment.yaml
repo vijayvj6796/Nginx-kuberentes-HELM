@@ -10,11 +10,11 @@ spec:
   replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-{{ .name }}
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-{{ .name }}
+        app: {{ .name }}
     spec:
       containers:
       - name: {{ .name }}
